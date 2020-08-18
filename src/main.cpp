@@ -43,19 +43,22 @@ int main(int argc, char **argv) {
     
     std::vector<Checkout_Till> tills;
 
-    Observer *O = Observer::init_observer();
-
     for (int i = 0; i < n_tills; ++i) {
         tills.push_back(Checkout_Till());
     }
+
+    Observer *O = Observer::init_observer(tills);
 
     std::srand(std::time(nullptr));
 
     int new_customer_timer = 0;
 
+    std::cout << "Simulating...  0%";
+
     for (int i = open_time_s; i > 0; --i) {
+        std::cout << "\rSimulating...  " << ((open_time_s - i) * 100 )/ open_time_s << "%";
         if (new_customer_timer == 0) {
-            int till_number = std::rand() % (tills.size() - 1);
+            int till_number = std::rand() % (tills.size());
             tills[till_number].accept_customer();
             new_customer_timer = (std::rand() % 330) + 30;
         } else {
@@ -67,6 +70,8 @@ int main(int argc, char **argv) {
         O->measure(tills);
     }
 
+    std::cout << std::endl;
+    std::cout << "Calculating..." << std::endl;
     O->display(open_time_s, tills.size());
 
     return 0;
