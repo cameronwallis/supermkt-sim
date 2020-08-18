@@ -13,4 +13,5 @@ class Checkout_Till {
         bool idle_flag;
         void tick();
         void accept_customer();
+        int queue_size();
 };

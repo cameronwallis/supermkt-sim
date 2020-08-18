@@ -22,3 +22,7 @@ void Checkout_Till::tick() {
         --this->service_timer;
     }
 }
+
+int Checkout_Till::queue_size() {
+    return this->checkout_q.size();
+}
