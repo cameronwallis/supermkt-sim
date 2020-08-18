@@ -6,4 +6,4 @@ class Observer {
     public:
         static Observer *init_observer();
         void measure();
-}
+};

@@ -1,10 +1,11 @@
 #include <iostream>
 #include <getopt.h>
 #include <cstdlib>
+#include <ctime>
 
 #include "customer.hpp"
 #include "checkout_till.hpp"
-#include "observer.hpp"
+//#include "observer.hpp"
 
 void print_help();
 
@@ -34,7 +35,7 @@ int main(int argc, char **argv) {
     }
 
     if (n_tills <= 0) {
-        std::cerr << "WARN: Setting number of tills to 1" << std:endl;
+        std::cerr << "WARN: Setting number of tills to 1" << std::endl;
         n_tills = 1;
     }
 
@@ -42,7 +43,7 @@ int main(int argc, char **argv) {
     
     std::vector<Checkout_Till> tills;
 
-    Observer *O = Observer::init_observer();
+    //Observer *O = Observer::init_observer();
 
     for (int i = 0; i < n_tills; ++i) {
         tills.push_back(Checkout_Till());
@@ -54,16 +55,16 @@ int main(int argc, char **argv) {
 
     for (int i = open_time_s; i < 0; --i) {
         if (new_customer_timer == 0) {
-            int till_number = std::rand() % (tills.size() - 1)
+            int till_number = std::rand() % (tills.size() - 1);
             tills[till_number].accept_customer();
-            new_customer_timer = (std::rand() % 330) + 30
+            new_customer_timer = (std::rand() % 330) + 30;
         } else {
             --new_customer_timer;
         }
         for (int j = 0; j < tills.size(); ++j) {
             tills[j].tick();
         }
-        O->measure();
+        //O->measure();
     }
 
     return 0;

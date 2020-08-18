@@ -1,5 +1,6 @@
 #include "customer.hpp"
 #include <cstdlib>
+#include <ctime>
 
 Customer::Customer() {
     std::srand(std::time(nullptr));
